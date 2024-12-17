@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+    <section>
+        <div class="leftBox">
+            <div class="content">
+                <h1>RANSOMWARE</h1>
+                <p>
+                    Ransomware is a type of malicious software that encrypts 
+                    a victim's files, making them inaccessible. Cybercriminals 
+                    behind ransomware attacks often demand a ransom payment in 
+                    cryptocurrency to decrypt the files. These attacks can target 
+                    individuals, businesses, and organizations, causing significant 
+                    financial losses and disruption.
+                </p>
+            </div>
+            <button class="upload-button" onclick="window.location.href='{{ url_for('upload_file') }}'">Upload</button>
+        </div>
+
+        <div class="events">
+            <ul>
+                <li>
+                    <div class="time">
+                        <h2>2024<br><span>APRIL</span></h2>
+                    </div>
+                    <div class="details">
+                        <h3>NHS London Ransomware Attack</h3>
+                        <p>
+                            The National Health Service in London was hit by a significant ransomware attack, disrupting operations and compromising the data of nearly 1 million patients.
+                        </p>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="time">
+                        <h2>2024 <br><span>SEPTEMBER</span></h2>
+                    </div>
+                    <div class="details">
+                        <h3>Stillwater Mining Company Ransomware Attack</h3>
+                        <p>
+                            The personal information of over 7,000 employees was stolen using the RansomHub RaaS. This highlights the growing threat posed by ransomware.
+                        </p>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="time">
+                        <h2>2024 <br><span>SEPTEMBER</span></h2>
+                    </div>
+                    <div class="details">
+                        <h3>Kawasaki Motors Europe Ransomware Attack</h3>
+                        <p>
+                            RansomHub was also responsible for a major attack on Kawasaki's European offices, causing financial losses.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reset Password</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pass.css') }}"> <!-- Updated path -->
+  <script>
+    // Function to validate the password
+    function validatePasswordForm() {
+      var newPassword = document.getElementById("new_password").value;
+      var reenterPassword = document.getElementById("reenter_password").value;
+
+      // Check if both fields are filled
+      if (newPassword === "" || reenterPassword === "") {
+        alert("Both password fields are required!");
+        return false;
+      }
+
+      // Check if both passwords match
+      if (newPassword !== reenterPassword) {
+        alert("Passwords do not match!");
+        return false;
+      }
+
+      return true; // Proceed with form submission
+    }
+  </script>
+</head>
+<body>
+  <section>
+    <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+    <div class="signin">
+      <div class="content">
+        <h2>Reset Password</h2>
+        <form action="{{ url_for('reset_password') }}" method="POST" onsubmit="return validatePasswordForm()">
+          <div class="form">
+            <div class="inputBox">
+              <input type="password" id="new_password" name="new_password" required>
+              <i>New Password</i>
+            </div>
+            <div class="inputBox">
+              <input type="password" id="reenter_password" name="reenter_password" required>
+              <i>Re-enter Password</i>
+            </div>
+            <div class="inputBox">
+              <input type="submit" value="Reset Password">
+            </div>
+          </div>
+        </form>
+        <a href="{{ url_for('login') }}" class="back-to-login">Back to Login</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload</title>
+    <style>
+        body {       
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('{{ url_for("static", filename="images/bb.jpg") }}');
+            background-size: cover;   
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+        }
+        .file-upload {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 400px;
+        }
+
+        .file-upload h2 {
+            margin-bottom: 10px;
+        }
+
+        .file-upload p {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .file-upload button {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #uploadStatus {
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="file-upload">
+        <h2>Upload Files</h2>
+        <p>Select File here</p>
+        <input type="file" id="fileInput">
+        <button onclick="uploadFile(event)">Upload</button>
+        <p id="uploadStatus"></p>
+    </div>
+
+    <script>
+        function uploadFile(event) {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            const uploadStatus = document.getElementById('uploadStatus');
+            
+            // Prevent form submission if no file is selected
+            if (!file) {
+                event.preventDefault();  // Prevent form submission
+                uploadStatus.textContent = 'Please choose a file before uploading!';
+                uploadStatus.style.color = 'red';  // Red color for error message
+                return;
+            }
+
+            // If a file is selected, reset status and proceed
+            uploadStatus.textContent = '';  // Clear any previous messages
+            
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    uploadStatus.textContent = 'File uploaded successfully!';
+                    uploadStatus.style.color = 'green';  // Green color for success message
+                } else {
+                    uploadStatus.textContent = 'An error occurred during upload.';
+                    uploadStatus.style.color = 'red';  // Red color for error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                uploadStatus.textContent = 'An error occurred during upload.';
+                uploadStatus.style.color = 'red';  // Red color for error message
+            });
+        }
+    </script>
+</body>
+</html>
